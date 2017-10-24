@@ -3,7 +3,7 @@ layout: post
 title: "Cấu trúc dữ liệu phân cấp và ứng dụng"
 date: 2013-06-22 8:00 PM
 categories: [data-structure, vi]
-author: hungnq1989
+author: hungneox
 tags : [data-structure]
 comments: true
 ---

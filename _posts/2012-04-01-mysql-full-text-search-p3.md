@@ -3,7 +3,7 @@ layout: post
 title: "MySQL Full-text Search - P3"
 date: 2012-04-01 8:00 PM
 categories: [database, mysql, full-text-search, vi]
-author: hungnq1989
+author: hungneox
 tags : [mysql, full-text-search]
 comments: true
 ---

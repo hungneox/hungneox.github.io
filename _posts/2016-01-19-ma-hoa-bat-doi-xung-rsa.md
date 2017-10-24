@@ -3,7 +3,7 @@ layout: post
 title: "Mã hoá bất đối xứng RSA"
 date: 2016-01-19 19:55 AM
 categories: [cryptography, vi]
-author: hungnq1989
+author: hungneox
 tags : [cryptography, rsa, asymmetric cryptography]
 description: Mã hoá bất đối xứng RSA
 image: /assets/posts/rsa/asym-encryption.png
