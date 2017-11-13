@@ -37,7 +37,7 @@ API Lifecycle là một chuỗi các trạng thái (series of states), có thể
 
 4. **Deprectated**
 
-    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions). Khi một phiên bản API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
+    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions) hoặc chuyển sang chế độ `read-only`. Khi một phiên bản API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
 
 5. **Retired / Archived**
 
