@@ -33,11 +33,11 @@ API Lifecycle là một chuỗi các trạng thái (series of states), có thể
 
 3. **Published**
 
-    Khi API được published, một phiên bản cố định của API sẽ được công bố lên trên một `Catalog` đã định trước. Phiên bản API này bây giờ đã có thể sự dụng với các developers và cộng đồng. Cũng trong giai đoạn này, thì các thiết lập về `visibility` và `susbcription` có thể thay đổi cho từng phiên bản cụ thể của API. Các thay đổi xa hơn (vd: chức năng) đòi hỏi một phiên bản API mới. Trong một số trường hợp cụ thể, trạng thái `published` cần được đồng bộ với `release cycles` của backend.
+    Khi API được published, một phiên bản cố định của API sẽ được công bố lên trên một `Catalog` đã định trước. Phiên bản API này bây giờ đã có thể sử dụng bởi developers và cộng đồng. Cũng trong giai đoạn này, thì các thiết lập về `visibility` và `susbcription` có thể thay đổi cho từng phiên bản cụ thể của API. Các thay đổi xa hơn (vd: chức năng) đòi hỏi một phiên bản API mới. Trong một số trường hợp cụ thể, trạng thái `published` cần được đồng bộ với `release cycles` của backend.
 
 4. **Deprectated**
 
-    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions) hoặc chuyển sang chế độ `read-only`. Khi một phiên bản mới API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
+    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đã và đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions) hoặc chuyển sang chế độ `read-only`. Khi một phiên bản mới API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
 
 5. **Retired / Archived**
 
