@@ -25,7 +25,7 @@ API Lifecycle là một chuỗi các trạng thái (series of states), có thể
 1. **Draft**
 
     Đây là trạng thái, mà API còn trong giai đoạn `bản thảo` trong quá trình phát triển và thiết kế. Chưa được deployed và liên kết với bất kỳ `Catalog` nào. 
-    _Cũng nói thêm là `Catalog` là một tập hợp các định nghĩa [Open API](https://www.openapis.org/) (tên mới của Swagger)._
+    _Cũng nói thêm là `Catalog` là một tập hợp các định nghĩa [Open API](https://www.openapis.org/) (tên mới của Swagger)._ Dùng từ fancy vậy thôi nhưng có thể hiểu như nó "danh bạ điện thoại" cho các APIs mà cụ thể là giống `Swagger Explorer`.
 
 2. **Staged**
 
@@ -33,11 +33,11 @@ API Lifecycle là một chuỗi các trạng thái (series of states), có thể
 
 3. **Published**
 
-    Khi API được published, một phiên bản cố định của API được triển khai lên trên một `Catalog`. Phiên bản API này bây giờ đã có thể sự dụng với các nhà phát triển và cộng đồng. Cũng trong giai đoạn này, thì các thiết lập về `visibility` và `susbcription` có thể thay đổi cho từng phiên bản cụ thể của API. Các thay đổi xa hơn đòi hỏi một phiên bản API mới. Trong một số trường hợp cụ thể, trạng thái `published` cần được đồng bộ với `release cycles` của backend.
+    Khi API được published, một phiên bản cố định của API sẽ được công bố lên trên một `Catalog` đã định trước. Phiên bản API này bây giờ đã có thể sự dụng với các developers và cộng đồng. Cũng trong giai đoạn này, thì các thiết lập về `visibility` và `susbcription` có thể thay đổi cho từng phiên bản cụ thể của API. Các thay đổi xa hơn (vd: chức năng) đòi hỏi một phiên bản API mới. Trong một số trường hợp cụ thể, trạng thái `published` cần được đồng bộ với `release cycles` của backend.
 
 4. **Deprectated**
 
-    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions) hoặc chuyển sang chế độ `read-only`. Khi một phiên bản API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
+    Khi chúng ta `deprecate` một API, có nghĩa là chúng ta không khuyến khích developers sử dụng nó nữa. Trong trạng thái `deprecated`, thì API chỉ còn có thể sử dụng bởi những những ứng dụng đang sử dụng nó mà thôi. Phiên bản API bị `deperecated` không cho phép developers đăng ký mới để sử dụng nữa (no new subscriptions) hoặc chuyển sang chế độ `read-only`. Khi một phiên bản mới API được `published` thì phiên bản cũ hơn nên được chuyển sang trạng thái `deprecated`. Một số `API Management Product` có thể tự động làm điều này.
 
 5. **Retired / Archived**
 
