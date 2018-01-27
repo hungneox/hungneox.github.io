@@ -19,7 +19,7 @@ github_username:  hungneox
 disqus_shortname: butchiso
 
 permalink: /:year/:month/:title.html
-gems:
+plugins:
  - jekyll-paginate
  - jekyll-gist
  - jemoji
