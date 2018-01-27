@@ -2,7 +2,7 @@
 layout: post
 title: "SOLID - 5 nguyên tắc của thiết kế hướng đối tượng"
 date: 2016-07-19 2:10 AM
-categories: [web-development, progrmaming, oriented-design]
+categories: [web-development, programming, oriented-design]
 author: hungneox
 tags : [php, software-engineering, oriented-design]
 description: "Nguyên tắc SOLID cơ bản kèm ví dụ"
