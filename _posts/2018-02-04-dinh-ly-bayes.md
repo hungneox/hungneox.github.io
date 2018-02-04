@@ -76,3 +76,10 @@ Tóm lại, xác xuất có điều kiện của một giả thuyết được t
 * Xác xuất triệu chứng/chứng cứ xảy ra là do giả thuyết (khả năng nhức đầu là do ung thư não). 
 
 Nói chung là sau mỗi lần bạn có thêm một triệu chứng mới thì phải cập nhật lại xác xuất của gỉa thuyết ban đầu. Trong thực tế đôi khi bạn không biết các điều kiện cần để tính toán là gì. Có thể bạn biết là có những chứng cứ, thông tin có thể ảnh hưởng đến kết quả nhưng tại thời điểm đó ta không biết nó là gì. Tuy nhiên có thể nói định lý Bayes là một công cụ quan trọng để chúng ta tư duy dựa trên lý trí và mang tính phản biện (critical thinking).
+
+# Tham khảo
+
+* [CRITICAL THINKING - Fundamentals: Bayes](https://www.youtube.com/watch?v=OqmJhPQYRc8)
+* [The Bayesian Trap](https://www.youtube.com/watch?v=R13BD8qKeTg)
+* [Thomas Bayes](https://en.wikipedia.org/wiki/Thomas_Bayes)
+* [Naive Bayes spam filtering](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering)
