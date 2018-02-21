@@ -12,7 +12,7 @@ comments: true
 
 # 1. Sơ lược về mã hoá đối xứng và bất đối xứng
 
-![Asymmetric cryptography](/assets/posts/rsa/asym-encryption.jpg){: .center-image }
+![Asymmetric cryptography](/assets/posts/rsa/asym-encryption.png){: .center-image }
 
 Hầu như ai có tìm hiểu về an toàn thông tin đều biết đến hai loại mã hoá phổ biến là mã hoá đối xứng (`symmetric cryptography`) 
 và mã hoá bất đối xứng (`asymmetric cryptography`). Về cơ bản thì:
