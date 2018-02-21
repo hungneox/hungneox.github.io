@@ -40,51 +40,51 @@ CREATE TABLE IF NOT EXISTS `articles` (
 {% highlight c %}
 source src1
 {
- type   = mysql
+  type   = mysql
 
- sql_host  = localhost
- sql_user  = root
- sql_pass  =
- sql_db   = butchiso
- sql_port  = 3306 # optional, default is 3306
+  sql_host  = localhost
+  sql_user  = root
+  sql_pass  =
+  sql_db    = butchiso
+  sql_port  = 3306 # optional, default is 3306
 
- sql_query  = \
+  sql_query  = \
   SELECT id, title, body, last_modified \
   FROM articles
 
- sql_attr_timestamp = last_modified
+  sql_attr_timestamp = last_modified
 
- sql_query_info  = SELECT * FROM articles WHERE id=$id
+  sql_query_info  = SELECT * FROM articles WHERE id=$id
 }
 
 
 index butchiso
 {
- source   = src1
- path   = C:\sphinx\data\butchiso
- docinfo   = extern
- charset_type = sbcs
+  source       = src1
+  path         = C:\sphinx\data\butchiso
+  docinfo      = extern
+  charset_type = sbcs
 }
 
 indexer
 {
- mem_limit  = 32M
+  mem_limit  = 32M
 }
 
 searchd
 {
- listen   = 9312
- listen   = 9306:mysql41
- log   = C:\sphinx\log\searchd.log
- query_log  = C:\sphinx\log\query.log
- read_timeout = 5
- max_children = 30
- pid_file  = C:\sphinx\log\searchd.pid
- max_matches  = 1000
- seamless_rotate = 1
- preopen_indexes = 1
- unlink_old  = 1
- workers   = threads # for RT to work
+  listen          = 9312
+  listen          = 9306:mysql41
+  log             = C:\sphinx\log\searchd.log
+  query_log       = C:\sphinx\log\query.log
+  read_timeout    = 5
+  max_children    = 30
+  pid_file        = C:\sphinx\log\searchd.pid
+  max_matches     = 1000
+  seamless_rotate = 1
+  preopen_indexes = 1
+  unlink_old      = 1
+  workers         = threads # for RT to work
 }
 {% endhighlight %}
 
@@ -128,8 +128,9 @@ if ($result['total'] > 0) {
         $id = $match['id'];
         $rs = mysql_query("SELECT * FROM articles WHERE id=$id");
         while ($row = mysql_fetch_array($rs, MYSQL_ASSOC)) {
-            printf("id: %s  - title: %s  - body: %s 
-" . PHP_EOL, $row["id"], $row["title"], $row["body"]);
+            printf(
+              "id: %s - title: %s - body: %s \n", $row["id"], $row["title"], $row["body"]
+            );
         }
         mysql_free_result($rs);
     }
