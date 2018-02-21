@@ -113,31 +113,29 @@ $s->SetArrayResult(true);
 //Search Query
 $result = $s->Query($_GET['q']);
 
-$con = mysql_connect("localhost","username","password");
-if (!$con)
-{
-  die('Could not connect: ' . mysql_error());
-}
-mysql_select_db("butchiso");
-mysql_query("set names 'utf8'");   
-if ($result['total'] > 0) {
- foreach ($result['matches'] as $match) 
- {  
-  $id = $match['id'];
-  $rs = mysql_query("SELECT * FROM images WHERE id=$id");
-  while($row = mysql_fetch_array($rs, MYSQL_ASSOC))
-  {
-   printf("id: %s  - text: %s" . PHP_EOL, $row["id"], $row["text"]);
-  }
-  mysql_free_result($rs);
- }
-} 
-else 
-{
- echo 'No results found';       
+$con = mysql_connect("localhost", "username", "password");
+
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
 }
 
-mysql_close($con); 
+mysql_select_db("butchiso");
+mysql_query("set names 'utf8'");
+
+if ($result['total'] > 0) {
+    foreach ($result['matches'] as $match) {
+        $id = $match['id'];
+        $rs = mysql_query("SELECT * FROM images WHERE id=$id");
+        while ($row = mysql_fetch_array($rs, MYSQL_ASSOC)) {
+            printf("id: %s  - text: %s" . PHP_EOL, $row["id"], $row["text"]);
+        }
+        mysql_free_result($rs);
+    }
+} else {
+    echo 'No results found';
+}
+
+mysql_close($con);
 {% endhighlight %}
 
 ### References:
