@@ -117,29 +117,24 @@ $s->SetArrayResult(true);
 //Search Query
 $result = $s->query('YourSQL');
 
-$con = mysql_connect("localhost","root","");
-if (!$con)
-{
-  die('Could not connect: ' . mysql_error());
+$con = mysql_connect("localhost", "root", "");
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
 }
 mysql_select_db("butchiso");
 
 if ($result['total'] > 0) {
- foreach ($result['matches'] as $match) 
- {  
-  $id = $match['id'];
-  $rs = mysql_query("SELECT * FROM articles WHERE id=$id");
-  while($row = mysql_fetch_array($rs, MYSQL_ASSOC))
-  {
-   printf("id: %s  - title: %s  - body: %s 
+    foreach ($result['matches'] as $match) {
+        $id = $match['id'];
+        $rs = mysql_query("SELECT * FROM articles WHERE id=$id");
+        while ($row = mysql_fetch_array($rs, MYSQL_ASSOC)) {
+            printf("id: %s  - title: %s  - body: %s 
 " . PHP_EOL, $row["id"], $row["title"], $row["body"]);
-  }
-  mysql_free_result($rs);
- }
-} 
-else 
-{
- echo 'No results found';       
+        }
+        mysql_free_result($rs);
+    }
+} else {
+    echo 'No results found';
 }
 
 mysql_close($con);
