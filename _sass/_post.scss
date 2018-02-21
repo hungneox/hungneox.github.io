@@ -39,7 +39,7 @@
         }
         
         pre {
-            margin: 0 -30px;
+            // margin: 0 -30px;
             font-size: 0.75rem;
             @include media-query($on-palm) {
                 margin: 0 -10px;

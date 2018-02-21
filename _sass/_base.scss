@@ -35,7 +35,7 @@ pre {
 }
 
 pre code {
-    padding: 0; 
+    padding: 0;
 }
 .hide {
     display: none;
@@ -43,6 +43,11 @@ pre code {
 .center {
     text-align: center;
 }
+
+figure.highlight {
+    margin: 0px;
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
