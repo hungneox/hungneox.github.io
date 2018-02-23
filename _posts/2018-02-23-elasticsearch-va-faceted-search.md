@@ -1,17 +1,17 @@
 ---
 layout: post
-title: "Faceted search và ElasticSearch" 
+title: "ElasticSearch và Faceted search" 
 date: 2018-02-23 14:00
 categories: [elasticsearch]
 author: hungneox
 tags : [faceted-search, elasticsearch]
-description: "Faceted search và ElasticSearch"
+description: "ElasticSearch và Faceted search"
 image: /assets/images/laravel.jpg
 comments: true
 published: false
 ---
 
-# Faceted search và ElasticSearch
+# Faceted search
 
 Faceted search hay còn gọi là faceted navigation, tạm dịch là tìm kiếm đa diện hay điều hướng đa diện. Nó là một kỹ thuật dùng để tra cứu thông tin dựa trên hệ thống phân loại đa diện (faceted classification system), nó chó phép người dùng có thể tìm kiếm hay và truy vấn thông tin một cách có hiệu quả bằng cách sàng lọc ra những kết quả mong muốn bằng nhiều bộ lọc cùng một lúc.
 
