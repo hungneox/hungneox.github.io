@@ -139,6 +139,6 @@ mysql_close($con);
 {% endhighlight %}
 
 ### References:
-http://www.hackido.com/2009/01/install-sphinx-search-on-ubuntu.html
-http://www.andrehonsberg.com/article/install-sphinxsearch-205-in-ubuntu-1204-server
-http://yob.id.au/2008/05/08/thinking-sphinx-and-unicode.html
+* [Install Sphinx Search on Ubuntu Intrepid Ibex](http://www.hackido.com/2009/01/install-sphinx-search-on-ubuntu.html)
+* [How To Install and Configure Sphinx on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-sphinx-on-ubuntu-14-04)
+* [THINKING SPHINX AND UNICODE](http://yob.id.au/2008/05/08/thinking-sphinx-and-unicode.html)
