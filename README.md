@@ -27,3 +27,7 @@ rvm use 2.5.0 --default
 ```
 gem install jekyll bundler jekyll-gist jekyll-paginate jemoji
 ```
+
+```
+bundle exec jekyll serve
+```
