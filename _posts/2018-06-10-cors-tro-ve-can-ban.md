@@ -70,7 +70,7 @@ chrome --disable-web-security --user-data-dir
 ## c) Cách thứ 3
 Là nếu như bạn hoàn toàn không thể làm gì được thì có thể viết một proxy đứng ở giữa front-end và server bạn cần truy xuất tài nguyên. Nói chung thì chỉ có browser cản bạn gởi request thôi, chứ dùng `curl` hay truy xuất thẳng trên browser thì vẫn bình thường. Cho nên bạn hoàn toàn có thể dựng một server để trung chuyển request và response mà không gặp vấn để gì. Thật ra mấu chốt là nếu client không gửi `Orign` header đến server thì server không check nó có phải là request CORS không.
 
-Ví dụ đây là một hàm từ package ["lumen-cors"][https://github.com/digiaonline/lumen-cors]
+Ví dụ đây là một hàm từ package [lumen-cors](https://github.com/digiaonline/lumen-cors)
 
 ```php
 /**
