@@ -56,7 +56,7 @@ Header này được đính kèm theo mỗi request đến server, nó được 
 Như đã nói ở trên, đây không thực sự là một lỗi kỹ thuật. Nó là cơ chế của thế giới web để đảm bảo vệ người dùng. Có một số cách để giải quyết vấn đề này:
 
 ## a) Cách tiêu chuẩn 
-Để "fix lỗi" này là thêm domain của bạn vào `Access-Control-Allow-Origin` header của server. Khi lập trình front-end, bạn nên sử dụng một domain để code, ví dụ `myawesomeapp.test` thay vì dùng `localhost:3000`.
+Để "fix lỗi" này là thêm domain của bạn vào `Access-Control-Allow-Origin` header của server. Khi lập trình front-end, bạn nên sử dụng một domain để code, ví dụ `myawesomeapp.test` thay vì dùng `localhost:3000`. (Hoặc đơn giản hơn là cấu hình để server trả về `Access-Control-Allow-Origin: *`. Nhưng cách này không được khuyến khích.)
 
 ## b) Cách thứ hai 
 Hoặc nếu như bạn hoàn toàn không thể kiểm soát được backend (không có contact của backend dev) và cần một giải pháp tạm thời, thì bạn có thể tắt chức năng bảo mật của trình duyệt
