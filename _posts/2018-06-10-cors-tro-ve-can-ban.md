@@ -25,7 +25,9 @@ Trước khi có tiêu chuẩn về `CORS`, thì không có cách nào để m�
 | http://store.company.com:81/dir/etc.html        | Faillure | Different port     |
 | http://news.company.com/dir/other.html          | Failture | Different host     |
 
-Cơ chế này nhằm ngăn chặn các cuộc tấn công Cross-site scripting (XSS), khi attacker nhúng cấy một đoạn mã vào các websites để gửi các thông tin đánh cắp được về máy chủ khác hoặc, thực hiện giao dịch bằng thông tin vừa ăn cắp được (từ cookies của trình duyệt etc).
+Cơ chế này nhằm hạn chế các cuộc tấn công Cross-site scripting (XSS), khi attacker nhúng cấy một đoạn mã vào các websites để gửi các thông tin đánh cắp được về máy chủ khác hoặc, thực hiện giao dịch bằng thông tin vừa ăn cắp được (từ cookies của trình duyệt etc).
+
+Và một trong những lợi ích to lớn khác là nó cung cấp một cơ chế (yếu) để ngăn các website khác ăn cắp traffic của bạn một cách quá dễ dàng :-)
 
 # CORS HTTP headers
 CORS sử dụng một số HTTP headers trong cả request và response để cho phép việc truy xuất tài nguyên không cùng một `origin` có thể xảy ra, mà vẫn đảm bảo độ bảo mật.
@@ -53,9 +55,11 @@ Header này được đính kèm theo mỗi request đến server, nó được 
 
 Như đã nói ở trên, đây không thực sự là một lỗi kỹ thuật. Nó là cơ chế của thế giới web để đảm bảo vệ người dùng. Có một số cách để giải quyết vấn đề này:
 
-a) cách chính thống để "fix lỗi" này là thêm domain của bạn vào `Access-Control-Allow-Origin` header của server. Khi lập trình front-end, bạn nên sử dụng một domain để code, ví dụ `myawesomeapp.test` thay vì dùng `localhost:3000`.
+## a) Cách tiêu chuẩn 
+Để "fix lỗi" này là thêm domain của bạn vào `Access-Control-Allow-Origin` header của server. Khi lập trình front-end, bạn nên sử dụng một domain để code, ví dụ `myawesomeapp.test` thay vì dùng `localhost:3000`.
 
-b) Hoặc nếu như bạn hoàn toàn không thể kiểm soát được backend (không có contact của backend dev) và cần một giải pháp tạm thời, thì bạn có thể tắt chức năng bảo mật của trình duyệt
+## b) Cách thứ hai 
+Hoặc nếu như bạn hoàn toàn không thể kiểm soát được backend (không có contact của backend dev) và cần một giải pháp tạm thời, thì bạn có thể tắt chức năng bảo mật của trình duyệt
 
 ```
 chrome --disable-web-security --user-data-dir
@@ -63,7 +67,20 @@ chrome --disable-web-security --user-data-dir
 
 **Lưu ý** rằng nó áp dụng cho tất cả các trang web, nên nếu bạn quên mở nó lại thì bạn có thể bị dính chưởng XSS.
 
-c) Cách thứ 3, là nếu như bạn hoàn toàn không thể làm gì được thì có thể viết một proxy đứng ở giữa front-end và server bạn cần truy xuất tài nguyên. Nói chung thì chỉ có browser cản bạn gởi request thôi, chứ dùng `curl` hay truy xuất thẳng trên browser thì vẫn bình thường. Cho nên bạn hoàn toàn có thể dựng một server để trung chuyển request và response mà không gặp vấn để gì.
+## c) Cách thứ 3
+Là nếu như bạn hoàn toàn không thể làm gì được thì có thể viết một proxy đứng ở giữa front-end và server bạn cần truy xuất tài nguyên. Nói chung thì chỉ có browser cản bạn gởi request thôi, chứ dùng `curl` hay truy xuất thẳng trên browser thì vẫn bình thường. Cho nên bạn hoàn toàn có thể dựng một server để trung chuyển request và response mà không gặp vấn để gì. Thật ra mấu chốt là nếu client không gửi `Orign` header đến server thì server không check nó có phải là request CORS không.
+
+Ví dụ đây là một hàm từ package ["lumen-cors"][https://github.com/digiaonline/lumen-cors]
+
+```php
+/**
+    * @inheritdoc
+    */
+public function isCorsRequest(Request $request)
+{
+    return $request->headers->has('Origin');
+}
+```
 
 # References
 1. https://medium.com/@baphemot/understanding-cors-18ad6b478e2b
