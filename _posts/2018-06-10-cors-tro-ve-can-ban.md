@@ -51,6 +51,30 @@ Bằng header này Server sẽ thông báo cho trình duyệt biết những req
 
 Header này được đính kèm theo mỗi request đến server, nó được sinh ra từ server mà nơi tài liệu được trả về. Và vì lý do bảo mật, trình duyệt không cho phép ghi đè, thay đổi gía trị của header này.
 
+## Preflight request
+
+Một cái preflight request là một request được gửi từ phía trình duyệt để thăm dò xem server có hiểu/ hỗ trợ giao thức CORS hay không. Nó được tự động gởi bởi trình duyệt. Việc của phía server là trả về những headers cần thiết cho phía client.
+
+Ví dụ, phía client có thể gửi một OPTIONS request để xem server có cho phép `DELETE` tài nguyên trên server hay không.
+
+```
+OPTIONS /resource/foo 
+Access-Control-Request-Method: DELETE 
+Access-Control-Request-Headers: origin, x-requested-with
+Origin: https://foo.bar.org
+```
+
+Server sẽ phản hồi cho phía client những thông tin cần thiết ví dụ như header `Access-Control-Allow-Methods` chứa những phương thức HTTP mà client được phép thực hiện.
+
+```
+HTTP/1.1 200 OK
+Content-Length: 0
+Connection: keep-alive
+Access-Control-Allow-Origin: https://foo.bar.org
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE
+Access-Control-Max-Age: 86400
+```
+
 # Làm thế nào để sửa lỗi "CORS"
 
 Như đã nói ở trên, đây không thực sự là một lỗi kỹ thuật. Nó là cơ chế của thế giới web để đảm bảo vệ người dùng. Có một số cách để giải quyết vấn đề này:
@@ -83,6 +107,7 @@ public function isCorsRequest(Request $request)
 ```
 
 # References
-1. https://medium.com/@baphemot/understanding-cors-18ad6b478e2b
-2. https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
-3. https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+1. [Bartosz Szczeciński, Understanding CORS](https://medium.com/@baphemot/understanding-cors-18ad6b478e2b)
+2. [Mozilla, Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)
+3. [Mozilla, Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+4. [Mozilla, Preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)
