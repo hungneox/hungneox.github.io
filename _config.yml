@@ -1,5 +1,5 @@
 # Site settings
-title: Bút Chì Số
+title: Hung Neox
 url: "http://butchiso.com"
 baseurl: "" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
 timezone: Europe/Helsinki
@@ -8,7 +8,7 @@ description: >
 
 # Your information
 email: hungnq1989@gmail.com
-author: Hung Neo
+author: Hung Neox
 avatar: "//www.gravatar.com/avatar/4a44cc577eaca63e8eb110932f15bc0a?d=mm&s=135"
 profile: Full stack developer.
 twitter_username: hungneox
