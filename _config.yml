@@ -1,6 +1,6 @@
 # Site settings
 title: Hung Neox
-url: "http://butchiso.com"
+url: "https://butchiso.com"
 baseurl: "" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
 timezone: Europe/Helsinki
 description: >
