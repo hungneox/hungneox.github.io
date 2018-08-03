@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hướng dẫn biên dịch Rust thành WebAssembly" 
-date: 2018-08-03 3:00
+date: 2018-08-04 3:00
 categories: [webassembly, rust]
 author: hungneox
 tags : [webassembly, rust, guid]
