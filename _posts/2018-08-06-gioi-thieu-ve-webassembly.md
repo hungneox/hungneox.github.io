@@ -16,7 +16,9 @@ comments: true
 
 Về cơ bản, WebAssembly là một ngôn ngữ mới có thể chạy trên trình duyệt (dĩ nhiên là ngoài JavaScript ra). Nó được thiết kể để dịch ra từ ngôn ngữ low-level khác như C/C++ và Rust, nhưng không nhằm để thay thế JavaScript. Hầu như JavaScript đủ mạnh để giải quyết đa số các vấn đề trên web. Tuy nhiên hiện nay chúng ta cũng gặp phải một số vấn đề về hiệu năng (performance) của JavaScript, trong các ứng dụng cần xử lý nhiều như các ứng dụng trò-chơi lập-thể (3D games), [thực-tế ảo (virtual reality)](https://www.wikiwand.com/en/Virtual_reality) và [thực-tế tăng-cường (augmented reality)](https://www.wikiwand.com/en/Augmented_reality), thị giác máy tính (computer vision), chỉnh sửa hình ảnh và phim v.v
 
-WebAssembly có một ý nghĩa không nhỏ với nền tảng web nói chung, nó cho phép chương trình được viết bằng nhiều ngôn ngữ khác nhau có thể chạy trên web, mà trước đó là bất khả thi. Các modules WebAssembly không chỉ có thể được import vào web app (trên trình duyệt) mà cũng có thể được sử dụng trong các ứng dụng node.js.
+WebAssembly có một ý nghĩa không nhỏ với nền tảng web nói chung, nó cho phép chương trình được viết bằng nhiều ngôn ngữ khác nhau có thể chạy trên web, mà trước đó là bất khả thi. Các modules WebAssembly không chỉ có thể được đưa vào các ứng dụng web (trên trình duyệt) mà cũng có thể được sử dụng trong các ứng dụng node.js. Cũng phải nói thêm là hiện nay, định dạng WASM đã được hỗ trợ rộng rãi trên các trình duyệt phổ biến.
+
+!["Browser party"](/assets/posts/webassembly/browser-party.png){: .center-image }
 
 Ngày nay, [các ứng dụng của WebAssembly](https://webassembly.org/docs/use-cases/) đã phát triển vượt khỏi phạm vi của các trò chơi trực tuyến (online games). Cùng với trình biên dịch [EmScripten](http://kripken.github.io/emscripten-site/), ngày càng có nhiều thử nghiệm với WebAssembly được triển khai. Ví dụ như
 
@@ -35,17 +37,17 @@ Ngày nay, [các ứng dụng của WebAssembly](https://webassembly.org/docs/us
 
 # WebAssembly có vài trò như thế nào đối với web?
 
+!["WebAssembly"](/assets/posts/webassembly/webassembly-2.png){: .center-image }
+
 Nền tảng web có thể được tách ra làm 2 phần
 - Phần máy ảo (virtual machine) để thực thi JavaScript code
 - Phần Web APIs để điều khiển các chức năng của trình duyệt, thiết bị ([DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [CSSOM](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model), [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API), IndexedDB, Web Audio API, etc)
 
-!["WebAssembly"](/assets/posts/webassembly/webassembly-2.png){: .center-image }
-
-Như đã nói ở trên WebAssembly không được tạo ra để thay thế JavaScript, mà để bổ sung cũng như hoạt đồng song song với JavaScript. Cả hai ngôn ngữ này mang lại nhiều lợi thế riêng của mình cho web. Ví dụ:
+Hầu như từ trước đến giờ, cái máy ảo trong trình duyệt chỉ có thể tải và chạy JavaScript, và cũng đã đề cập ở trên ngôn ngữ độc quyền này cũng có một số nhược điểm. Sự ra đời WebAssembly không được tạo ra để thay thế JavaScript, mà để bổ sung cũng như hoạt đồng song song với JavaScript. Cả hai ngôn ngữ này mang lại nhiều lợi thế riêng của mình cho web. Ví dụ:
 
 - JavaScript là một ngôn ngữ cấp cao, linh động và hiệu quả đủ để viết các ứng dụng web. Nó có nhiều lợi thế như là một ngôn ngữ có kiểu động (dynamically typed langugage), không yêu cầu phải biên dịch và một hệ sinh thái khổng lồ gồm nhiều khung-làm-việc (framework), thư viện (libraries) và đủ các chủng loại công cụ (tools chain).
 
-- Trong khi đó, WebAssembly là một ngôn ngữ cấp thấp, với một định dạng nhị phân nhỏ gọn (compact binary format), được thực thi với một tốc độ gần như là **native**. Đồng thời nó cũng cho phép chương trình được viết bằng các ngôn ngữ cấp thấp cho phép quản lý nhớ như C++ hoặc Rust có khả năng chạy trên nền web. Cũng nói thêm là trong tương lai, WebAssembly cũng có mục tiêu là hỗ trợ các ngôn ngữ có bộ dọn rác (garbage collector), như Python hay Ruby.
+- Trong khi đó, WebAssembly là một ngôn ngữ cấp thấp, với một định dạng nhị phân nhỏ gọn (compact binary format), được thực thi với một tốc độ **gần-tương-đương** với các ngôn ngữ cấp thấp. Đồng thời nó cũng cho phép chương trình được viết bằng các ngôn ngữ cấp thấp cho phép quản lý nhớ như C++ hoặc Rust có khả năng chạy trên nền web. Cũng nói thêm là trong tương lai, WebAssembly cũng có mục tiêu là hỗ trợ các ngôn ngữ có bộ dọn rác (garbage collector), như Python hay Ruby.
 
 Nói về tốc độ thực thi và hiệu năng, thì trên trang Hỏi-Đáp của WebAssembly cũng có nói rằng, WebAssembly được phân-tích cú-pháp (parse) nhanh hơn JavaScript 20 lần.
 
