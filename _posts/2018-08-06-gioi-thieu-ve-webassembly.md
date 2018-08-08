@@ -27,7 +27,7 @@ Ngày nay, [các ứng dụng của WebAssembly](https://webassembly.org/docs/us
 - [Thiết kế giao diện người dùng](https://blog.figma.com/webassembly-cut-figmas-load-time-by-3x-76f3f2395164)
 - [Phát hiện ngôn ngữ](https://github.com/jaukia/cld-js)
 - [Trộn âm](http://eecs.qmul.ac.uk/~keno/60.pdf)
-- [Hỗ trỡ mã hoá video](https://github.com/brion/ogv.js/)
+- [Hỗ trợ mã hoá video](https://github.com/brion/ogv.js/)
 - [Xử lý tính hiệu số](https://github.com/shamadee/web-dsp)
 - [Hình ảnh y khoa](https://github.com/jodogne/wasm-dicom-parser)
 - [Giả lập vật lý](https://github.com/kripken/ammo.js/)
@@ -47,7 +47,7 @@ Hầu như từ trước đến giờ, cái máy ảo trong trình duyệt chỉ
 
 - JavaScript là một ngôn ngữ cấp cao, linh động và hiệu quả đủ để viết các ứng dụng web. Nó có nhiều lợi thế như là một ngôn ngữ có kiểu động (dynamically typed langugage), không yêu cầu phải biên dịch và một hệ sinh thái khổng lồ gồm nhiều khung-làm-việc (framework), thư viện (libraries) và đủ các chủng loại công cụ (tools chain).
 
-- Trong khi đó, WebAssembly là một ngôn ngữ cấp thấp, với một định dạng nhị phân nhỏ gọn (compact binary format), được thực thi với một tốc độ **gần-tương-đương** với các ngôn ngữ cấp thấp. Đồng thời nó cũng cho phép chương trình được viết bằng các ngôn ngữ cấp thấp cho phép quản lý nhớ như C++ hoặc Rust có khả năng chạy trên nền web. Cũng nói thêm là trong tương lai, WebAssembly cũng có mục tiêu là hỗ trợ các ngôn ngữ có bộ dọn rác (garbage collector), như Python hay Ruby.
+- Trong khi đó, WebAssembly là một ngôn ngữ cấp thấp, với một định dạng nhị phân nhỏ gọn (compact binary format), được thực thi với một tốc độ **gần-tương-đương** với các ngôn ngữ cấp thấp. Đồng thời nó cũng cho phép chương trình được viết bằng các ngôn ngữ cấp thấp cho phép quản lý nhớ như C++ hoặc Rust có khả năng chạy trên nền web. Ngoài ra trong tương lai, WebAssembly cũng có mục tiêu là hỗ trợ các ngôn ngữ có bộ dọn rác (garbage collector), như Python hay Ruby.
 
 Nói về tốc độ thực thi và hiệu năng, thì trên trang Hỏi-Đáp của WebAssembly cũng có nói rằng, WebAssembly được phân-tích cú-pháp (parse) nhanh hơn JavaScript 20 lần.
 

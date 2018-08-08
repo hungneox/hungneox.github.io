@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hướng dẫn biên dịch Rust thành WebAssembly" 
-date: 2018-08-04 3:00
+date: 2018-08-08 2:00
 categories: [webassembly, rust]
 author: hungneox
 tags : [webassembly, rust, guid]
@@ -13,7 +13,7 @@ published: false
 
 # Giới thiệu sơ lược
 
-Chắc hẳn bạn đã nghe nói về [Rust](https://www.rust-lang.org/en-US/), bị cuốn hút bởi [WebAssembly](https://webassembly.org/)? 
+Chắc hẳn bạn đã nghe nói về [Rust](https://www.rust-lang.org/en-US/), bị cuốn hút bởi [WebAssembly]({% post_url 2018-08-06-gioi-thieu-ve-webassembly %})? 
 
 Từ phiên bản [Rust 1.14](https://blog.rust-lang.org/2016/12/22/Rust-1.14.html) trở đi, chúng ta đã có thể biên dịch Rust ra WASM với sự hỗ trợ của [Emscripten](https://github.com/kripken/emscripten). Emscripten là một cái LLVM-to-Javascript compiler.
 
