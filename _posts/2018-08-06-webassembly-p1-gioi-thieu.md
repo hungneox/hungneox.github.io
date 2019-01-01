@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Giới thiệu về WebAssembly" 
+title: "WebAssembly - Phần 1: Giới thiệu" 
 date: 2018-08-06 1:00
 categories: [webassembly, rust]
 author: hungneox
 tags : [webassembly, rust, guid]
-description: "Giới thiệu về WebAssembly"
+description: "Giới thiệu về WebAssembly, WebAssembly là gì"
 image: /assets/posts/webassembly/game-changer.jpg
 comments: true
 ---
