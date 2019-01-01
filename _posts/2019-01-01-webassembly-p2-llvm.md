@@ -12,7 +12,7 @@ published: true
 ---
 # Giới thiệu sơ lược
 
-Tiếp theo phần trước [WebAssembly]({% post_url 2018-08-06-webassembly-p1-gioi-thieu %}), bài viết này sẽ giới thiệu về mối quan hệ giữa LLVM và WebAssembly, cũng như làm một số thử nghiệm để dịch [Rust](https://blog.rust-lang.org/2016/12/22/Rust-1.14.html) sang WebAssembly sử dụng Empscripten.
+Tiếp theo phần trước [WebAssembly]({% post_url 2018-08-06-webassembly-p1-gioi-thieu %}), bài viết này sẽ giới thiệu về mối quan hệ giữa LLVM và WebAssembly, cũng như làm một số thử nghiệm để dịch [Rust](https://blog.rust-lang.org/2016/12/22/Rust-1.14.html) và C sang WebAssembly sử dụng Empscripten.
 
 # WebAssembly - LLVM - Emscripten
 
@@ -44,19 +44,40 @@ Nói một cách đơn giản hoá, Empscripten là một trình biên dịch LL
 
 # Dịch C sang WASM
 
-Giả sử ta có file `doubler.c` như sau
+Giả sử ta có file `add.c` như sau
 
-```C
-int doubler(int x) {
-  return 2 * x;
+{% highlight c %}
+int add(int a, int b) {
+  return a + b;
 }
-```
+{% endhighlight %}
+
 
 Chạy lệnh sau để biên dịch C thành wasm
 
 ```
-emcc doubler.c -Os -s WASM=1 -s SIDE_MODULE=1 -o doubler.wasm
+emcc -s "EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']" -s EXPORTED_FUNCTIONS="['_add']" -s WASM=1 -o add.js  add.c
 ```
+Nhìn vào tham số của dòng lệnh trên ta cũng thấy ẩn chứa đằng sau đó là một số "tà thuật", không có hai cái tham số `EXTRA_EXPORTED_RUNTIME_METHODS`, `EXPORTED_FUNCTIONS` thì cũng không dùng lại được hàm `add`, chưa kể emscripten còn tự thêm underscore phía trước.
+
+Sau đó ta có thể dùng lại hàm add trong javascript như sau
+
+```
+<html>
+<head>
+  <script src="add.js"></script>
+  <script>
+      Module.onRuntimeInitialized = _ => {
+        const add = Module.cwrap('add', 'number', 'number');
+        console.log(add(89, 29))
+      }
+  </script>
+</head>
+<body>
+
+</body>
+</html>
+````
 
 # Dịch Rust sang WASM
 
@@ -98,11 +119,11 @@ emcc -v
 
 Ví dụ ta biên dịch một file Rust đơn giản như sau:
 
-```Rust
+{% highlight rust %}
 fn main() {
     println!("Hello World!");
 }
-```
+{% endhighlight %}
 
 Sau đó ta chạy lệnh rustc để dịch `hello.rs` sang một bundle bao gồm 3 file: .wasm, .js để load .wasm và file html
 
@@ -120,6 +141,8 @@ Truy cập vào địa chỉ [http://localhost:8000/hello.html](http://localhost
 
 
 !["Hello World"](/assets/posts/webassembly/helloworld.jpg){: .center-image }
+
+- Còn tiếp -
 
 # Tham khảo
 
