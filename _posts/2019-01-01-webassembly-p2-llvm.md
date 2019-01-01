@@ -42,43 +42,6 @@ Nói một cách đơn giản hoá, Empscripten là một trình biên dịch LL
 
 !["Compiler structure"](/assets/posts/webassembly/llvm-ir-wasm.png){: .center-image }
 
-# Dịch C sang WASM
-
-Giả sử ta có file `add.c` như sau
-
-{% highlight c %}
-int add(int a, int b) {
-  return a + b;
-}
-{% endhighlight %}
-
-
-Chạy lệnh sau để biên dịch C thành wasm
-
-```
-emcc -s "EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']" -s EXPORTED_FUNCTIONS="['_add']" -s WASM=1 -o add.js  add.c
-```
-Nhìn vào tham số của dòng lệnh trên ta cũng thấy ẩn chứa đằng sau đó là một số "tà thuật", không có hai cái tham số `EXTRA_EXPORTED_RUNTIME_METHODS`, `EXPORTED_FUNCTIONS` thì cũng không dùng lại được hàm `add`, chưa kể emscripten còn tự thêm underscore phía trước.
-
-Sau đó ta có thể dùng lại hàm add trong javascript như sau
-
-```
-<html>
-<head>
-  <script src="add.js"></script>
-  <script>
-      Module.onRuntimeInitialized = _ => {
-        const add = Module.cwrap('add', 'number', 'number');
-        console.log(add(89, 29))
-      }
-  </script>
-</head>
-<body>
-
-</body>
-</html>
-````
-
 # Dịch Rust sang WASM
 
 1. Đầu tiên là cài Rust
@@ -141,6 +104,48 @@ Truy cập vào địa chỉ [http://localhost:8000/hello.html](http://localhost
 
 
 !["Hello World"](/assets/posts/webassembly/helloworld.jpg){: .center-image }
+
+
+Để tìm hiểu cách sử dụng lại các hàm được export ra `.wasm` như thế nào, chúng ta có thể tìm hiểu ở ví dụ tiếp theo.
+
+# Dịch C sang WASM
+
+Giả sử ta có file `add.c` như sau
+
+{% highlight c %}
+int add(int a, int b) {
+  return a + b;
+}
+{% endhighlight %}
+
+
+Chạy lệnh sau để biên dịch C thành wasm
+
+```
+emcc -s "EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']" -s EXPORTED_FUNCTIONS="['_add']" -s WASM=1 -o add.js  add.c
+```
+Nhìn vào tham số của dòng lệnh trên ta cũng thấy ẩn chứa đằng sau đó là một số "tà thuật", không có hai cái tham số `EXTRA_EXPORTED_RUNTIME_METHODS`, `EXPORTED_FUNCTIONS` thì cũng không dùng lại được hàm `add`, chưa kể emscripten còn tự thêm underscore phía trước.
+
+Sau đó ta có thể dùng lại hàm add trong javascript như sau
+
+```
+<html>
+<head>
+  <script src="add.js"></script>
+  <script>
+      Module.onRuntimeInitialized = _ => {
+        const add = Module.cwrap('add', 'number', 'number');
+        console.log(add(89, 29))
+      }
+  </script>
+</head>
+<body>
+
+</body>
+</html>
+````
+
+Vậy là với `Module.cwrap`, chúng ta có thể lấy được hàm cộng hai số mà chúng ta đã viết ở trong `add.c`. Tuy nó chẳng có gì ấn tượng cả nhưng nó mang lại nhiều khả năng để chúng ta có thể chuyển code được viết bằng các ngôn ngữ khác để dùng lại trong JavaScript.
 
 - Còn tiếp -
 
