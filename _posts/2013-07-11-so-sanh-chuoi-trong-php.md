@@ -57,7 +57,7 @@ Nhận hai tham số `$str1` và `$str2` và trả về kết quả:
 2. `> 0` nếu như `$str1 > $str2`
 2. `0` nếu như `$str1 = $str2`
 
-Đây là một hàm binary-safe, tức là nhận dữ liệu đầu vào như dữ liệu thô mà không ngầm định kiểu dữ liệu. Và hàm strcmp chỉ so sánh nội dung của hai chuỗi mà không phải so sánh địa chỉ bộ nhớ và bỏ qua các ký tự đặc biệt. Lưu ý thêm là hàm này không phân biệt hoa thường, nhưng hàm strcasecmp thì có.
+Đây là một hàm binary-safe, tức là nhận dữ liệu đầu vào như dữ liệu thô mà không ngầm định kiểu dữ liệu. Và hàm strcmp chỉ so sánh nội dung của hai chuỗi mà không phải so sánh địa chỉ bộ nhớ và bỏ qua các ký tự đặc biệt. Lưu ý thêm là hàm này có phân biệt hoa thường, nhưng hàm `strcasecmp` thì không.
 
 Ví dụ: Hai chuỗi “string1” và “string1\0\n”, hiển nhiên là không giống nhau. Nếu dùng toán tử so sánh ở trên để kiếm tra thì tất nhiên kết quả trả về sẽ là ‘false’. Tuy nhiên nếu dùng hàm strcmp ta sẽ nhận được kết quả là true vì nội dung hai chuỗi này hoàn toàn giống nhau nếu bỏ đi ký tự đặc biệt trong PHP là \0 và\n. 
 echo (strcmp('string1', 'string1\0\n')) ? 'true' : 'false';
