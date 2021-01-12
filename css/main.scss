@@ -3,13 +3,13 @@
 ---
 @charset "utf-8";
 
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$base-font-size:   17px;
+$base-font-family: "Questrial", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$base-font-size:   18px;
 $small-font-size:  $base-font-size * 0.875;
-$base-line-height: 1.5;
+$base-line-height: 2;
 
-$code-font-family:   Menlo, Monaco, Consolas, "DejaVu Sans Mono", "Liberation Mono", "Courier New", Courier, SimSun, monospace;
-$code-font-size:     0.85rem;
+$code-font-family:   "Roboto Mono", "Liberation Mono", "Courier New", Courier, SimSun, monospace;
+$code-font-size:     14px;
 
 // Width of the content area
 $content-width:    800px;
