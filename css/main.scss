@@ -1,42 +1,39 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
+
 @charset "utf-8";
 
-$base-font-family: "Questrial", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$base-font-size:   18px;
-$small-font-size:  $base-font-size * 0.875;
-$base-line-height: 2;
+$base-font-family: "IBM Plex Serif", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol";
+$base-font-size: 18px;
+$small-font-size: $base-font-size * 0.875;
+$base-line-height: 1.5;
 
-$code-font-family:   "Roboto Mono", "Liberation Mono", "Courier New", Courier, SimSun, monospace;
-$code-font-size:     14px;
+$code-font-family: "IBM Plex Mono", "Liberation Mono", "Courier New", Courier,
+  SimSun, monospace;
+$code-font-size: 14px;
 
 // Width of the content area
-$content-width:    800px;
+$content-width: 800px;
 
-$on-palm:          600px;
-$on-laptop:        800px;
+$on-palm: 600px;
+$on-laptop: 800px;
 
 $color-link: #036;
 $color-link-hover: #069;
 
 $header-bg: #39424e;
 $header-bg-hover: #2ec866;
-$header-link: #FFF;
-$header-fg: #FFF;
+$header-link: #fff;
+$header-fg: #fff;
 
 @mixin media-query($device) {
-    @media screen and (max-width: $device) {
-        @content;
-    }
+  @media screen and (max-width: $device) {
+    @content;
+  }
 }
 
-
-
 // Import partials from `sass_dir` (defaults to `_sass`)
-@import
-    "base",
-    "layout",
-    "syntax-highlighting",
-    "easybook"
-;
+@import "base", "layout", "syntax-highlighting", "easybook";
