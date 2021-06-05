@@ -9,10 +9,10 @@ description: >
 # Your information
 email: hungnq1989@gmail.com
 author: Hung Neox
-avatar: "//www.gravatar.com/avatar/4a44cc577eaca63e8eb110932f15bc0a?d=mm&s=135"
+avatar: "//avatars.githubusercontent.com/u/199614?v=4"
 profile: Full stack developer.
 twitter_username: hungneox
-github_username:  hungneox
+github_username: hungneox
 
 # Comment Service
 #  choose one and un-comment the line to active it
@@ -20,9 +20,9 @@ disqus_shortname: butchiso
 
 permalink: /:year/:month/:title.html
 plugins:
- - jekyll-paginate
- - jekyll-gist
- - jemoji
+  - jekyll-paginate
+  - jekyll-gist
+  - jemoji
 
 # Build settings
 paginate: 20
