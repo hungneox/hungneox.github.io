@@ -211,13 +211,17 @@ We can looks at the break-down steps of `validatePassword` as follow:
 
 Let's take this happy path example `validatePassword('salaSANA123')`
 
-1. We will start with input `salaSANA123` is passed to `minLength`,
-   1.1 it will be evaluated to a `Either` value that contains a right value `salaSANA123`
-2. The return value `E.right('salaSANA123')` value will be piped to `E.chain(oneCapital)`,
-   2.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passes it to `oneCapital`
-   2.2 `oneCapital('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
-3. Again, the return value `E.right('salaSANA123')` will be piped to `E.chain(oneNumber)`,
+1. We will start with input `salaSANA123` is passed to `minLength`
+   1.1 It will be evaluated to a `Either` value that contains a right value `salaSANA123`
+2. The return value of `minLength('salaSANA123')` value will be piped to `E.chain(oneCapital)`
+
+   2.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passes it to `oneCapital`.
+
+   2.2 `oneCapital('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`.
+
+3. Again, the return value of `oneCapital('salaSANA123')` will be piped to `E.chain(oneNumber)`
    3.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passes it to `oneNumber`
+
    3.2 `oneNumber('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
 
 In any situation that one of the three function returns `E.left(new Error('...'))` the `left` value is returned immediately
