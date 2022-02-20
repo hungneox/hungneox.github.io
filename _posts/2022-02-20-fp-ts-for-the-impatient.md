@@ -15,7 +15,7 @@ published: true
 
 # Introduction
 
-This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In this brief introduction, we don't go through the what is functional programming as well as its advantanges/disadvantages.
+This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In this brief introduction, we don't go through the what is functional programming as well as its advantages/disadvantages.
 
 You don’t really need to understand all mathematics concepts in order to learn functional programming. IMO, you only need to to know how each operator works. Once you get to know each basic operators in fp-ts, you can go back and review the mathematic theory.
 
