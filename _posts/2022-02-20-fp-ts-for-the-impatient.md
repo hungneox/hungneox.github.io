@@ -6,12 +6,12 @@ categories: [typescript, functional programming]
 author: hungneox
 tags: [typescript, javascript, fp-ts, fp]
 description: "An introduction to fp-ts for the impatient"
-image: /assets/posts/webassembly/game-changer.jpg
+image: /assets/posts/fp-ts-for-the-impatient/white-rabbit.png
 comments: true
 published: true
 ---
 
-!["Subtractive color"](/assets/posts/fp-ts-for-the-impatient/white-rabbit.jpeg){: .center-image }{:width="100px"}
+!["Subtractive color"](/assets/posts/fp-ts-for-the-impatient/white-rabbit.png){: .center-image }
 
 # Introduction
 
@@ -316,9 +316,9 @@ From the docs
 >
 > `fp-ts` provides it’s own implementation of do notation which can help to simplify effectful code.
 
-You can read about the "official" explaination and example from fp-ts [here](https://gcanti.github.io/fp-ts/guides/do-notation.html) about do notation in fp-ts
+You can read about the "official" explaination and example from fp-ts ([see this](https://gcanti.github.io/fp-ts/guides/do-notation.html)) about do notation in fp-ts
 
-Generally speaking, "do notation" allows you bind previous returned value from other functions in the pipe to a context object. Without do notation it's very hard to maintain the variable scope
+Generally speaking, "do notation" allows you bind previous returned values from other functions in the pipe to a context object. Without do notation it's very hard to maintain the variable scope, since you either to pass it along as intermediate result or go deep into nested pipe.
 
 ```tsx
 import * as TE from "fp-ts/TaskEither";
