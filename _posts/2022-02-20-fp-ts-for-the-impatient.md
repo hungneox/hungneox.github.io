@@ -8,7 +8,7 @@ tags: [typescript, javascript, fp-ts, fp]
 description: "An introduction to fp-ts for the impatient"
 image: /assets/posts/webassembly/game-changer.jpg
 comments: true
-published: false
+published: true
 ---
 
 !["Subtractive color"](/assets/posts/fp-ts-for-the-impatient/white-rabbit.jpeg){: .center-image }{:width="100px"}
@@ -29,7 +29,7 @@ It’s the basic building block of fp-ts, you can use [pipe](https://gcanti.gith
 
 Let’s look at this simple example:
 
-```tsx
+```typescript
 import { pipe } from "fp-ts/lib/function";
 
 const add =
@@ -56,7 +56,7 @@ The result of this operation is `5`. It’s self-explanatory but we can look at
 
 At this point, the pipe receives a number as input and output a new number, but we can also do something else like input a string from a number also.
 
-```tsx
+```typescript
 const meowify = (num: number): string => {
   return "meow ".repeat(num).trim();
 };
@@ -66,7 +66,7 @@ pipe(1, add1, add3, meowify); // 'meow meow meow meow meow'
 
 Notes that we cannot put the meowify function in between add1 and add3 function like this
 
-```tsx
+```typescript
 ❌ pipe(1, add1, meowify, add3)
 ```
 
@@ -74,7 +74,7 @@ Notes that we cannot put the meowify function in between add1 and add3 function 
 
 The flow operator is very similar to pipe operator, the difference is the first argument of flow must be a function. For example, we can use the three functions above to form a flow like this:
 
-```tsx
+```typescript
 import { flow, pipe } from "fp-ts/lib/function";
 
 flow(add1, add3, meowify)(1); // this is equivalent to pipe(1, add1, add3, meowify)
@@ -88,7 +88,7 @@ What is a good use case for the **`flow`** operator? When should you use it ov
 
 In the example with `pipe` what if we don’t want to feed `1` as the input to the pipe? We probably have to do this:
 
-```tsx
+```typescript
 const meowify1 = (n: number) => pipe(n, flow(add1, add3, meowify)
 
 // but with flow you don't need to
@@ -98,7 +98,7 @@ const meowify2 = flow(add1, add3, meowify)
 
 Tip: If you have a long curried functions, you can use `ap` from Identity monad to apply all arguments
 
-```tsx
+```typescript
 import { ap } from "fp-ts/lib/Identity";
 
 const makeUrl = (protocol: string) => (domain: string) => (port: number) => {
@@ -119,19 +119,21 @@ pipe("https://", "swappie.com", 80, makeUrl);
 
 ## Option, Either
 
-Options (or Maybe monads) are containers (or specifically an Option is a monad), that wrap values that could be truthy or falsy. If the values are truthy, we say the Option is of Some type, and if the values are falsy (`undefined | null`) we say it has the None type.
+### Option
 
-```tsx
+Options are containers, or specifically an Option is a monad (it's analogous to [Maybe monad in Haskell](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe)), that wrap values that could be `truthy` or `falsy`. If the values are `truthy`, we say the `Option` is of `Some` type, and if the values are `falsy` (`undefined | null`) we say it has the `None` type.
+
+```typescript
 type Option<A> = None | Some<A>;
 ```
 
-> Why should we use Option types in the first place? Typescript already has good ways to deal with **`undefined`** or **`null`** values. For example, we can use **[optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)** or **[nullish coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing)**.
+"Why should we use Option types in the first place?" You might ask. We already know that Typescript already has good ways to deal with **`undefined`** or **`null`** values. For example, we can use **[optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)** or **[nullish coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing)**.
 
-> Option types are useful because it gives us superpowers. The first superpower is the **`map`** operator.
+Mostly you won’t need to use Option, **optional chaining** can do it as well for you. But the Option type is more than just checking for null. Options can be used to represent failing operations, and most imporantly you can chain them or in other words you can compose functions that return `Option` into a more complex one.
 
-In most cases you probably don’t need Option, but let see these example to see some benefit of Option monad
+In most cases you probably don’t need Option, but let see these example to see some benefits of Option monad
 
-```tsx
+```typescript
 const findUrl = (array: string[]): string | undefined =>
   array.find((item) => item.startsWith("http"));
 
@@ -150,7 +152,7 @@ console.log(parseLink([])); // no link
 
 The code above can be converted to FP style
 
-```tsx
+```typescript
 import * as O from "fp-ts/lib/Option";
 
 // O.fromNullable convert a non-nullable value to Some(value) and nullable
@@ -167,15 +169,13 @@ const parseLink = flow(
 );
 ```
 
-> Mostly you won’t need to use Option, optional chaining can do it as well for you. But the Option type is more than just checking for null. Options can be used to represent failing operations. And just like how you can lift undefined into an Option, you can also lift an Option into another fp-ts container, like Either.
-
 ### Either
 
 An Either is a type that represents a *synchronous* operation that can succeed or fail. Much like Option, where it is **`Some`** or **`None`**, the Either type is either **`Right`** or **`Left`**. **`Right`** represents success and **`Left`** represents failure. It is analogous to the **[Result](https://doc.rust-lang.org/std/result/)** type in Rust.
 
-#### Either in action
+This is one practical example of using fp-ts, specially `Either` for validating a password strength. For each individual functions below, I think they pretty self-explanatory excepts the last one `validatePassword`
 
-```tsx
+```typescript
 import * as E from "fp-ts/Either";
 import * as F from "fp-ts/function";
 
@@ -191,9 +191,31 @@ const oneCapital = (s: string): E.Either<Error, string> =>
 const oneNumber = (s: string): E.Either<Error, string> =>
   /[0-9]/g.test(s) ? E.right(s) : E.left(new Error("at least one number"));
 
+// This also works
+// F.pipe(minLength(s), E.chain(oneCapital), E.chain(oneNumber));
+
 const validatePassword = (s: string): E.Either<Error, string> =>
-  F.pipe(minLength(s), E.chain(oneCapital), E.chain(oneNumber));
+  F.pipe(s, minLength, E.chain(oneCapital), E.chain(oneNumber));
 ```
+
+We can looks at the break-down steps of `validatePassword` as follow:
+
+Let's take this happy path example `validatePassword('salaSANA123')`
+
+1. We will start with input `salaSANA123` is passed to `minLength`,
+   1.1 it will be evaluated to a `Either` value that container a right value `salaSANA123`
+2. The return value `E.right('salaSANA123')` value will be piped to `E.chain(oneCapital)`,
+   2.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passed it to `oneCapital`
+   2.2 `oneCapital('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
+3. Again, the return value `E.right('salaSANA123')` will be piped to `E.chain(oneNumber)`,
+   3.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passed it to `oneNumber`
+   3.2 `oneNumber('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
+
+In any situation that one of the three function returns `E.left(new Error('...'))` the `left` value is returned immediately
+
+#### Lifting `Option` to `Either`
+
+And just like how you can lift undefined into an Option, you can also lift an Option into another fp-ts container, like Either.
 
 ## Task, TaskEither
 
@@ -201,7 +223,7 @@ const validatePassword = (s: string): E.Either<Error, string> =>
 
 In `fp-ts`, a `Task` is basically a js `Promise`, this is the definition of `Task`.
 
-```tsx
+```typescript
 interface Task<A> {
   (): Promise<A>;
 }
@@ -217,7 +239,7 @@ From the docs
 
 Basically `TaskEither` = `Task` + `Either`, so with `TaskEither` you can have a `Task` that may fail.
 
-```tsx
+```typescript
 import axios, { AxiosResponse } from "axios";
 import * as F from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
@@ -258,7 +280,7 @@ const main = async () => {
 main();
 ```
 
-### Do Notation
+## Do Notation
 
 From the docs
 
@@ -268,7 +290,7 @@ From the docs
 >
 > Let’s take a look at an example of how do notation can help to simplify our code. Here we have a bit of code which reads two values from the command line, prints them and stores them in an object with `x` and `y` properties.
 
-```tsx
+```typescript
 F.pipe(
   TE.Do,
   TE.bind("orderId", () => doCreatePlusOrder(reqBody)),
