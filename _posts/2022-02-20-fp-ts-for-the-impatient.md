@@ -15,7 +15,7 @@ published: true
 
 # Introduction
 
-This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In this brief introduction, we don't go through the what is functionl programming as well as its advantanges/disadvantages.
+This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In this brief introduction, we don't go through the what is functional programming as well as its advantanges/disadvantages.
 
 You don’t really need to understand all mathematics concepts in order to learn functional programming. IMO, you only need to to know how each operator works. Once you get to know each basic operators in fp-ts, you can go back and review the mathematic theory.
 
@@ -129,7 +129,7 @@ type Option<A> = None | Some<A>;
 
 "Why should we use Option types in the first place?" You might ask. We already know that Typescript already has good ways to deal with **`undefined`** or **`null`** values. For example, we can use **[optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)** or **[nullish coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing)**.
 
-The anwser is: mostly you won’t need to use Option, **optional chaining** can do it as well for you. However the Option type is more than just checking for **null**. Options can be used to represent failing operations, and most imporantly you can chain them or in other words you can compose functions that return `Option` into a more complex one.
+The anwser is: mostly you won’t need to use Option, **optional chaining** can do it as well for you. However the Option type is more than just checking for **null**. Options can be used to represent failing operations, and most importantly you can chain them or in other words you can compose functions that return `Option` into a more complex one.
 
 In most cases you probably don’t need Option, but let see these example to see some benefits of Option monad
 
@@ -318,7 +318,7 @@ From the docs
 >
 > `fp-ts` provides it’s own implementation of do notation which can help to simplify effectful code.
 
-You can read about the "official" explaination and example from fp-ts ([see this](https://gcanti.github.io/fp-ts/guides/do-notation.html)) about do notation in fp-ts
+You can read about the "official" explanation and example from fp-ts ([see this](https://gcanti.github.io/fp-ts/guides/do-notation.html)) about do notation in fp-ts
 
 Generally speaking, "do notation" allows you bind previous returned values from other functions in the pipe to a context object. Without do notation it's very hard to maintain the variable scope, since you either to pass it along as intermediate result or go deep into nested pipe.
 
