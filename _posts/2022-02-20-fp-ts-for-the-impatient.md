@@ -15,7 +15,7 @@ published: true
 
 # Introduction
 
-This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In bri
+This post is an express tour for impatients who want to use [fp-ts](https://gcanti.github.io/fp-ts/). In this brief introduction, we don't go through the what is functionl programming as well as its advantanges/disadvantages.
 
 # Practical guide to fp-ts
 
@@ -129,7 +129,7 @@ type Option<A> = None | Some<A>;
 
 "Why should we use Option types in the first place?" You might ask. We already know that Typescript already has good ways to deal with **`undefined`** or **`null`** values. For example, we can use **[optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)** or **[nullish coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing)**.
 
-Mostly you won’t need to use Option, **optional chaining** can do it as well for you. But the Option type is more than just checking for null. Options can be used to represent failing operations, and most imporantly you can chain them or in other words you can compose functions that return `Option` into a more complex one.
+The anwser is: mostly you won’t need to use Option, **optional chaining** can do it as well for you. However the Option type is more than just checking for **null**. Options can be used to represent failing operations, and most imporantly you can chain them or in other words you can compose functions that return `Option` into a more complex one.
 
 In most cases you probably don’t need Option, but let see these example to see some benefits of Option monad
 
@@ -169,6 +169,8 @@ const parseLink = flow(
 );
 ```
 
+💡 Notes that you can **lift** a `nullable` value to an `Option` using `O.fromNullable`
+
 ### Either
 
 An Either is a type that represents a *synchronous* operation that can succeed or fail. Much like Option, where it is **`Some`** or **`None`**, the Either type is either **`Right`** or **`Left`**. **`Right`** represents success and **`Left`** represents failure. It is analogous to the **[Result](https://doc.rust-lang.org/std/result/)** type in Rust.
@@ -196,6 +198,9 @@ const oneNumber = (s: string): E.Either<Error, string> =>
 
 const validatePassword = (s: string): E.Either<Error, string> =>
   F.pipe(s, minLength, E.chain(oneCapital), E.chain(oneNumber));
+
+// validatePassword('123456'); // Error: at least one capital letter
+// validatePassword('salaSANA123'); // salaSANA123
 ```
 
 We can looks at the break-down steps of `validatePassword` as follow:
@@ -203,19 +208,32 @@ We can looks at the break-down steps of `validatePassword` as follow:
 Let's take this happy path example `validatePassword('salaSANA123')`
 
 1. We will start with input `salaSANA123` is passed to `minLength`,
-   1.1 it will be evaluated to a `Either` value that container a right value `salaSANA123`
+   1.1 it will be evaluated to a `Either` value that contains a right value `salaSANA123`
 2. The return value `E.right('salaSANA123')` value will be piped to `E.chain(oneCapital)`,
-   2.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passed it to `oneCapital`
+   2.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passes it to `oneCapital`
    2.2 `oneCapital('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
 3. Again, the return value `E.right('salaSANA123')` will be piped to `E.chain(oneNumber)`,
-   3.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passed it to `oneNumber`
+   3.1 `E.chain` will unwrap the `E.right('salaSANA123')` to `'salaSANA123'` value and passes it to `oneNumber`
    3.2 `oneNumber('salaSANA123')` will evaluate the string and returns `E.right('salaSANA123')`
 
 In any situation that one of the three function returns `E.left(new Error('...'))` the `left` value is returned immediately
 
-#### Lifting `Option` to `Either`
+💡 And just like how you can lift `nullable` into an Option, you can also lift an `Option` into another fp-ts container, like `Either`.
 
-And just like how you can lift undefined into an Option, you can also lift an Option into another fp-ts container, like Either.
+```tsx
+const minLength = (s: string): O.Option<string> =>
+  s.length >= 6 ? O.some(s) : O.none;
+
+...
+
+const validatePassword = (s: string): Either<Error, string> =>
+  pipe(
+    minLength(s),
+    E.fromOption(() => new Error("at least 6 characters")), //
+    chain(oneCapital),
+    chain(oneNumber)
+  );
+```
 
 ## Task, TaskEither
 
