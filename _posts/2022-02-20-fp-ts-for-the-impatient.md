@@ -86,8 +86,6 @@ flow(add1, add3, meowify)(1); // this is equivalent to pipe(1, add1, add3, meowi
 pipe(1, flow(add1, add3, meowify)); // 'meow meow meow meow meow'
 ```
 
-What is a good use case for the **`flow`** operator? When should you use it over the **`pipe`** operator? A general rule of thumb is when you want to avoid using an anonymous function. In Typescript, a good example of an anonymous function are callbacks.
-
 In the example with `pipe` what if we don’t want to feed `1` as the input to the pipe? We probably have to do this:
 
 ```typescript
@@ -324,20 +322,29 @@ Generally speaking, "do notation" allows you bind previous returned values from 
 import * as TE from "fp-ts/TaskEither";
 import { pipe } from "fp-ts/function";
 const createUser = (username: string): TE.TaskEither<Error, string> => {
-  return TE.right(`UserId${username}`);
+  return TE.right(`UserId-${username}`);
 };
 
 const createOrder = (userId: string): TE.TaskEither<Error, string> => {
-  return TE.right(`Order${userId}`);
+  return TE.right(`Order-${userId}`);
 };
 
 const createOrderRow = (
   orderId: string,
   userId: string
 ): TE.TaskEither<Error, string> => {
-  return TE.right(`OrderRowFor${orderId}${userId}`);
+  return TE.right(`OrderRowFor-${orderId}-${userId}`);
 };
 
+// This will return something like
+// {
+//   _tag: 'Right',
+//   right: {
+//     userId: 'UserIdRick',
+//     orderId: 'Order123456-UserIdRick',
+//     orderRowId: 'OrderRowFor-UserIdRick-Order123456-UserIdRick'
+//   }
+// }
 const main = pipe(
   TE.Do,
   TE.bind("userId", () => createUser("Rick")),
