@@ -167,6 +167,10 @@ const parseLink = flow(
   findUrl,
   O.fold(() => "no link", makeA)
 );
+
+parseLink(input); // <a href=http://www.google.com>http://www.google.com</a>
+
+parseLink([]); // no link
 ```
 
 💡 Notes that you can **lift** a `nullable` value to an `Option` using `O.fromNullable`
@@ -257,9 +261,11 @@ From the docs
 
 Basically `TaskEither` = `Task` + `Either`, so with `TaskEither` you can have a `Task` that may fail.
 
-```typescript
+```tsx
 import axios, { AxiosResponse } from "axios";
 import * as F from "fp-ts/function";
+import * as E from "fp-ts/Either";
+import * as T from "fp-ts/Task";
 import * as TE from "fp-ts/TaskEither";
 
 type ToDo = {
@@ -298,6 +304,8 @@ const main = async () => {
 main();
 ```
 
+The `TE.fold` function is actually very simple, it accepts two functions (`onLeft`, `onRight`) and it will call `onLeft` on `left` value and `onRight` on `right` value, depends on the previous value from the pipe.
+
 ## Do Notation
 
 From the docs
@@ -305,19 +313,40 @@ From the docs
 > Both [Haskell](https://wiki.haskell.org/Monad#do-notation) and [PureScript](https://github.com/purescript/documentation/blob/master/language/Syntax.md#do-notation) languages provide syntactic sugar for working with monads in the form of do notation.
 >
 > `fp-ts` provides it’s own implementation of do notation which can help to simplify effectful code.
->
-> Let’s take a look at an example of how do notation can help to simplify our code. Here we have a bit of code which reads two values from the command line, prints them and stores them in an object with `x` and `y` properties.
 
-```typescript
-F.pipe(
+You can read about the "official" explaination and example from fp-ts [here](https://gcanti.github.io/fp-ts/guides/do-notation.html) about do notation in fp-ts
+
+Generally speaking, "do notation" allows you bind previous returned value from other functions in the pipe to a context object. Without do notation it's very hard to maintain the variable scope
+
+```tsx
+import * as TE from "fp-ts/TaskEither";
+import { pipe } from "fp-ts/function";
+const createUser = (username: string): TE.TaskEither<Error, string> => {
+  return TE.right(`UserId${username}`);
+};
+
+const createOrder = (userId: string): TE.TaskEither<Error, string> => {
+  return TE.right(`Order${userId}`);
+};
+
+const createOrderRow = (
+  orderId: string,
+  userId: string
+): TE.TaskEither<Error, string> => {
+  return TE.right(`OrderRowFor${orderId}${userId}`);
+};
+
+const main = pipe(
   TE.Do,
-  TE.bind("orderId", () => doCreatePlusOrder(reqBody)),
-  TE.bind("order", ({ orderId }) => getOrderOrThrow(orderId)),
-  TE.bind("orderRowId", ({ order }) => findOrderRowIdOrThrow(order)),
-  TE.map(({ order, orderRowId }) => ({
-    orderId: order.id,
+  TE.bind("userId", () => createUser("Rick")),
+  TE.bind("orderId", ({ userId }) => createOrder(userId)),
+  TE.bind("orderRowId", ({ userId, orderId }) =>
+    createOrderRow(userId, orderId)
+  ),
+  TE.map(({ userId, orderId, orderRowId }) => ({
+    userId,
+    orderId,
     orderRowId,
-    reqBody,
   }))
 );
 ```
